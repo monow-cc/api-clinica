@@ -33,6 +33,9 @@ namespace BackEnd_Clinica.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Metodo")
+                        .HasColumnType("INTEGER");
+
                     b.Property<Guid>("PacienteId")
                         .HasColumnType("TEXT");
 
@@ -217,6 +220,9 @@ namespace BackEnd_Clinica.Migrations
                     b.Property<Guid>("ClinicaId")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("Deletado")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("MostrarApp")
                         .HasColumnType("INTEGER");
 
@@ -225,6 +231,9 @@ namespace BackEnd_Clinica.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<float>("Valor")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("ValorCusto")
                         .HasColumnType("REAL");
 
                     b.HasKey("Id");
@@ -286,7 +295,7 @@ namespace BackEnd_Clinica.Migrations
                         .IsRequired();
 
                     b.HasOne("BackEnd_Clinica.Model.TratamentoClinica", "TratamentoClinica")
-                        .WithMany()
+                        .WithMany("Agendamentos")
                         .HasForeignKey("TratamentoClinicaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -383,6 +392,11 @@ namespace BackEnd_Clinica.Migrations
             modelBuilder.Entity("BackEnd_Clinica.Model.Profissional", b =>
                 {
                     b.Navigation("Clinicas");
+                });
+
+            modelBuilder.Entity("BackEnd_Clinica.Model.TratamentoClinica", b =>
+                {
+                    b.Navigation("Agendamentos");
                 });
 #pragma warning restore 612, 618
         }

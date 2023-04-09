@@ -5,6 +5,7 @@
         public Guid Id { get; set; }
         public string Name { get; set; }
         public float Valor { get; set; }
+        public float ValorCusto { get; set; }
         public bool MostrarApp { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace BackEnd_Clinica.Context
                 .HasForeignKey(a => a.PacienteId);
             modelBuilder.Entity<Agendamento>()
                .HasOne(a => a.TratamentoClinica)
-               .WithMany()
+               .WithMany(a => a.Agendamentos)
                .HasForeignKey(a => a.TratamentoClinicaId);
         }
     }

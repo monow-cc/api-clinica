@@ -5,7 +5,9 @@ using BackEnd_Clinica.Exeption;
 using BackEnd_Clinica.HUB;
 using BackEnd_Clinica.Model;
 using BackEnd_Clinica.VOS.Enter.Agendamento;
+using BackEnd_Clinica.VOS.Enter.Agendamento.Update;
 using BackEnd_Clinica.VOS.Exit.Agendamento;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -60,6 +62,41 @@ namespace BackEnd_Clinica.Controllers
             var convert = _mapper.Map<List<Agendamento>, List<AgendamentoVOExit>>(get);
             
            
+
+            return Ok(convert);
+        }
+        [Authorize]
+        [HttpPut("UpdateTime")]
+        public async Task<ActionResult<Agendamento>> UpdateTime(AgendamentoUpdateTimeVOEnter entity)
+        {
+
+            Guid clinicaId = Guid.Parse(HttpContext.Items["ClinicaId"]!.ToString()!);// pega clinica no token
+            var get = await _context.Agendamento.Where(e => e.Id == entity.Id).FirstOrDefaultAsync();
+            if (get == null) throw new AplicationRequestExeption("Agendamento não encontrado",HttpStatusCode.Unauthorized);
+            get.Horario = entity.Horario;
+            _context.Agendamento.Entry(get).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            var convert = _mapper.Map<Agendamento, AgendamentoVOExit>(get);
+            await _hubContext.Clients.GroupExcept(clinicaId.ToString(), entity.ConnectionId).SendAsync("updateconsulta", convert);
+
+            return Ok(convert);
+        }
+        [Authorize]
+        [HttpPut("UpdatePagamento")]
+        public async Task<ActionResult<Agendamento>> UpdatePagamento(AgendamentoUpdatePagamentoVOEnter entity)
+        {
+
+            Guid clinicaId = Guid.Parse(HttpContext.Items["ClinicaId"]!.ToString()!);// pega clinica no token
+            var get = await _context.Agendamento.Where(e => e.Id == entity.Id).FirstOrDefaultAsync();
+            if (get == null) throw new AplicationRequestExeption("Agendamento não encontrado", HttpStatusCode.Unauthorized);
+            get.Pago = true;
+            get.Metodo = entity.Metodo;
+            _context.Agendamento.Entry(get).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            var convert = _mapper.Map<Agendamento, AgendamentoVOExit>(get);
+            await _hubContext.Clients.GroupExcept(clinicaId.ToString(), entity.ConnectionId).SendAsync("updateconsultapag", convert);
 
             return Ok(convert);
         }

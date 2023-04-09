@@ -9,6 +9,7 @@
         public int Tipo { get; set; }
         public string Horario { get; set; } 
         public bool Pago { get; set; }
+        public int Metodo { get; set; }
         public string ConnectionId { get; set; }
     }
 }

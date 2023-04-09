@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4qZPM4tIuCERN+2Z5PPy2T2dx/JTikS+JFCnxfuVRUjjJQwhqeFe9h3k57knY+z65FBxNONQiej1EyZeF3hAqw==",
+  "dgSpecHash": "BugyUqLX8dLZpuu3Cuyg04uB/ET9IKTUbyoRcjniU/g+0Ots2CqWT5UZ8tVIRNU5aS7OdlwYJOhMJQmBdEX2nQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Luan\\Desktop\\TesteSignalR\\Back-End-Clinica-C-\\BackEnd-Clinica\\BackEnd-Clinica.csproj",
+  "projectFilePath": "C:\\Users\\Luan\\Documents\\GitHub\\api-clinica\\BackEnd-Clinica\\BackEnd-Clinica.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Luan\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Luan\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

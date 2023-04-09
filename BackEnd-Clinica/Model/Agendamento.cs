@@ -14,7 +14,7 @@ namespace BackEnd_Clinica.Model
         public string Horario { get; set;}
         public DateTime Data { get; set;}
         public bool Pago { get; set;}
-        
+        public int Metodo { get; set;}
         
         public Clinica? Clinica { get; set;}
         public ProfissionalClinica? ProfissionalClinica { get; set;}

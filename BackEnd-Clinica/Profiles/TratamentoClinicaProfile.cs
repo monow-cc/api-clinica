@@ -13,10 +13,18 @@ namespace BackEnd_Clinica.Profiles
                 .ForPath(dest => dest.Id, opts => opts.MapFrom(x => x.Id))
                     .ForPath(dest => dest.Name, opts => opts.MapFrom(x => x.Name))
                         .ForPath(dest => dest.Valor, opts => opts.MapFrom(x => x.Valor))
+                        .ForPath(dest => dest.ValorCusto, opts => opts.MapFrom(x => x.ValorCusto))
                             .ForPath(dest => dest.MostrarApp, opts => opts.MapFrom(x => x.MostrarApp));
             CreateMap<TratamentoClinicaVOEnter, TratamentoClinica>()
                    .ForPath(dest => dest.Name, opts => opts.MapFrom(x => x.Name))
                        .ForPath(dest => dest.Valor, opts => opts.MapFrom(x => x.Valor))
+                       .ForPath(dest => dest.ValorCusto, opts => opts.MapFrom(x => x.ValorCusto))
+                           .ForPath(dest => dest.MostrarApp, opts => opts.MapFrom(x => x.MostrarApp));
+            CreateMap<TratamentoClinicaUpdateVOEnter, TratamentoClinica>()
+                   .ForPath(dest => dest.Id, opts => opts.MapFrom(x => x.Id))
+                     .ForPath(dest => dest.Name, opts => opts.MapFrom(x => x.Name))
+                       .ForPath(dest => dest.Valor, opts => opts.MapFrom(x => x.Valor))
+                       .ForPath(dest => dest.ValorCusto, opts => opts.MapFrom(x => x.ValorCusto))
                            .ForPath(dest => dest.MostrarApp, opts => opts.MapFrom(x => x.MostrarApp));
         }
     }

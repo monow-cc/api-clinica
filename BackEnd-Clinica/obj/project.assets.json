@@ -2367,11 +2367,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Luan\\Desktop\\TesteSignalR\\Back-End-Clinica-C-\\BackEnd-Clinica\\BackEnd-Clinica.csproj",
+      "projectUniqueName": "C:\\Users\\Luan\\Documents\\GitHub\\api-clinica\\BackEnd-Clinica\\BackEnd-Clinica.csproj",
       "projectName": "BackEnd-Clinica",
-      "projectPath": "C:\\Users\\Luan\\Desktop\\TesteSignalR\\Back-End-Clinica-C-\\BackEnd-Clinica\\BackEnd-Clinica.csproj",
+      "projectPath": "C:\\Users\\Luan\\Documents\\GitHub\\api-clinica\\BackEnd-Clinica\\BackEnd-Clinica.csproj",
       "packagesPath": "C:\\Users\\Luan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Luan\\Desktop\\TesteSignalR\\Back-End-Clinica-C-\\BackEnd-Clinica\\obj\\",
+      "outputPath": "C:\\Users\\Luan\\Documents\\GitHub\\api-clinica\\BackEnd-Clinica\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Luan\\AppData\\Roaming\\NuGet\\NuGet.Config",
