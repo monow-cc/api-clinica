@@ -38,7 +38,7 @@ namespace BackEnd_Clinica.Controllers
         {
             Guid clinicaId = Guid.Parse(HttpContext.Items["ClinicaId"]!.ToString()!); // pega a clinica do token do usuario
 
-            var get = await _context.Clinicas.Include(x => x.ProfissionalClinicas).ThenInclude(x => x.Profissional).Include(x => x.PacienteClinicas).ThenInclude(x => x.Paciente).Include(x => x.TratamentoClinicas).FirstOrDefaultAsync(x => x.Id == clinicaId);
+            var get = await _context.Clinicas.Include(x => x.ProfissionalClinicas.Where(e => e.Status != 3)).ThenInclude(x => x.Profissional).Include(x => x.PacienteClinicas).ThenInclude(x => x.Paciente).Include(x => x.TratamentoClinicas.Where(e => e.Deletado == false)).FirstOrDefaultAsync(x => x.Id == clinicaId);
 
             var convert = _mapper.Map<Clinica, ClinicaAuthVOExit>(get);
             return Ok(convert);

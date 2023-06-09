@@ -1,6 +1,8 @@
 using BackEnd_Clinica.HUB;
 using BackEnd_Clinica.MIddleware;
 using BackEnd_Clinica.Program;
+using Microsoft.Extensions.FileProviders;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,7 +44,11 @@ app.UseMiddleware(typeof(AuthenticatorMiddleware));
 app.UseAuthorization();
 
 app.UseCors("CorsPolicy");
-
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "Archives")),
+    RequestPath = "/Archives"
+});
 app.UseEndpoints(endpoints =>
 {   endpoints.MapControllers();
     endpoints.MapHub<ClinicaHUB>("/ClinicaHub");

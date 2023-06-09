@@ -17,6 +17,11 @@ namespace BackEnd_Clinica.Context
         public DbSet<PacienteClinica> PacientesClinica { get; set; }
         public DbSet<TratamentoClinica> TratamentoClinicas { get; set; }
         public DbSet<Agendamento> Agendamento { get; set;}
+        public DbSet<GeradorPaciente> GeradorPacientes { get; set;}
+        public DbSet<Receita> Receitas { get; set;}
+        public DbSet<ReceitaArquivos> ReceitaArquivos { get; set;}
+        public DbSet<Resultado> Resultados { get; set;}
+        public DbSet<ResultadoArquivo> ResultadoArquivos { get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BackEnd_Clinica.Context;
 using BackEnd_Clinica.Exeption;
+using BackEnd_Clinica.HUB;
 using BackEnd_Clinica.Model;
 using BackEnd_Clinica.Services;
 using BackEnd_Clinica.VOS.Enter.User;
@@ -8,7 +9,9 @@ using BackEnd_Clinica.VOS.Exit.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Data;
 using System.Net;
 
@@ -21,12 +24,14 @@ namespace BackEnd_Clinica.Controllers
         private readonly AppDbContext _context;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
+        private readonly IHubContext<ClinicaHUB> _hubContext;
 
-        public UserController(AppDbContext context, IConfiguration config, IMapper mapper)
+        public UserController(AppDbContext context, IConfiguration config, IMapper mapper, IHubContext<ClinicaHUB> hubContext)
         {
             _context = context;
             _config = config;
             _mapper = mapper;
+            _hubContext = hubContext;
         }
         [HttpPost]
         public async Task<ActionResult<AuthVOExit>> Post(UserVOEnter userVo)
@@ -71,7 +76,7 @@ namespace BackEnd_Clinica.Controllers
             {
                 Token = jwt.GerarToken(usuario)
             };
-
+            await _hubContext.Clients.Group(usuario.ClinicaId.ToString()).SendAsync("userconnect", $"Usuario: {usuario.Nome} Conectado na clinica");
 
             return Ok(token);
         }

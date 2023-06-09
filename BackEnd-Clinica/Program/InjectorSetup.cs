@@ -7,7 +7,8 @@ namespace BackEnd_Clinica.Program
         public static void AddInjections(this IServiceCollection services)
         {
             services.AddScoped<JWTService>();
-
+            services.AddScoped<Gerador>();
+            services.AddScoped<UploadFile>();
 
         }
     }

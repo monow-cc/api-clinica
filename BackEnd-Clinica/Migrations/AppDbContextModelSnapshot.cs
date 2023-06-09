@@ -36,6 +36,9 @@ namespace BackEnd_Clinica.Migrations
                     b.Property<int>("Metodo")
                         .HasColumnType("INTEGER");
 
+                    b.Property<Guid>("PacienteClinicaId")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("PacienteId")
                         .HasColumnType("TEXT");
 
@@ -54,6 +57,8 @@ namespace BackEnd_Clinica.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClinicaId");
+
+                    b.HasIndex("PacienteClinicaId");
 
                     b.HasIndex("PacienteId");
 
@@ -87,31 +92,77 @@ namespace BackEnd_Clinica.Migrations
                     b.ToTable("Clinicas");
                 });
 
+            modelBuilder.Entity("BackEnd_Clinica.Model.GeradorPaciente", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ClinicaId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("PacienteId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClinicaId");
+
+                    b.HasIndex("PacienteId");
+
+                    b.ToTable("GeradorPacientes");
+                });
+
             modelBuilder.Entity("BackEnd_Clinica.Model.Paciente", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Cpf")
-                        .IsRequired()
+                    b.Property<string>("Altura")
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("Bairro")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("Cadastro")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Cidade")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("Cpf")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("Nacimento")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Numero")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
+                    b.Property<string>("Peso")
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Rua")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Sexo")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -211,6 +262,100 @@ namespace BackEnd_Clinica.Migrations
                     b.ToTable("Proprietarios");
                 });
 
+            modelBuilder.Entity("BackEnd_Clinica.Model.Receita", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Created_At")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("PacienteClinicaId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PacienteClinicaId");
+
+                    b.ToTable("Receitas");
+                });
+
+            modelBuilder.Entity("BackEnd_Clinica.Model.ReceitaArquivos", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ReceitaId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceitaId");
+
+                    b.ToTable("ReceitaArquivos");
+                });
+
+            modelBuilder.Entity("BackEnd_Clinica.Model.Resultado", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Created_At")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("PacienteClinicaId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PacienteClinicaId");
+
+                    b.ToTable("Resultados");
+                });
+
+            modelBuilder.Entity("BackEnd_Clinica.Model.ResultadoArquivo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ResultadoId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ResultadoId");
+
+                    b.ToTable("ResultadoArquivos");
+                });
+
             modelBuilder.Entity("BackEnd_Clinica.Model.TratamentoClinica", b =>
                 {
                     b.Property<Guid>("Id")
@@ -282,6 +427,12 @@ namespace BackEnd_Clinica.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BackEnd_Clinica.Model.PacienteClinica", "PacienteClinica")
+                        .WithMany()
+                        .HasForeignKey("PacienteClinicaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BackEnd_Clinica.Model.Paciente", "Paciente")
                         .WithMany()
                         .HasForeignKey("PacienteId")
@@ -304,6 +455,8 @@ namespace BackEnd_Clinica.Migrations
 
                     b.Navigation("Paciente");
 
+                    b.Navigation("PacienteClinica");
+
                     b.Navigation("ProfissionalClinica");
 
                     b.Navigation("TratamentoClinica");
@@ -318,6 +471,25 @@ namespace BackEnd_Clinica.Migrations
                         .IsRequired();
 
                     b.Navigation("Proprietario");
+                });
+
+            modelBuilder.Entity("BackEnd_Clinica.Model.GeradorPaciente", b =>
+                {
+                    b.HasOne("BackEnd_Clinica.Model.Clinica", "Clinica")
+                        .WithMany()
+                        .HasForeignKey("ClinicaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BackEnd_Clinica.Model.Paciente", "Paciente")
+                        .WithMany()
+                        .HasForeignKey("PacienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Clinica");
+
+                    b.Navigation("Paciente");
                 });
 
             modelBuilder.Entity("BackEnd_Clinica.Model.PacienteClinica", b =>
@@ -358,6 +530,50 @@ namespace BackEnd_Clinica.Migrations
                     b.Navigation("Profissional");
                 });
 
+            modelBuilder.Entity("BackEnd_Clinica.Model.Receita", b =>
+                {
+                    b.HasOne("BackEnd_Clinica.Model.PacienteClinica", "PacienteClinica")
+                        .WithMany("Receitas")
+                        .HasForeignKey("PacienteClinicaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PacienteClinica");
+                });
+
+            modelBuilder.Entity("BackEnd_Clinica.Model.ReceitaArquivos", b =>
+                {
+                    b.HasOne("BackEnd_Clinica.Model.Receita", "Receita")
+                        .WithMany("ReceitaArquivos")
+                        .HasForeignKey("ReceitaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Receita");
+                });
+
+            modelBuilder.Entity("BackEnd_Clinica.Model.Resultado", b =>
+                {
+                    b.HasOne("BackEnd_Clinica.Model.PacienteClinica", "PacienteClinica")
+                        .WithMany("Resultados")
+                        .HasForeignKey("PacienteClinicaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PacienteClinica");
+                });
+
+            modelBuilder.Entity("BackEnd_Clinica.Model.ResultadoArquivo", b =>
+                {
+                    b.HasOne("BackEnd_Clinica.Model.Resultado", "Resultado")
+                        .WithMany("ResultadoArquivos")
+                        .HasForeignKey("ResultadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Resultado");
+                });
+
             modelBuilder.Entity("BackEnd_Clinica.Model.TratamentoClinica", b =>
                 {
                     b.HasOne("BackEnd_Clinica.Model.Clinica", "Clinica")
@@ -389,9 +605,26 @@ namespace BackEnd_Clinica.Migrations
                     b.Navigation("TratamentoClinicas");
                 });
 
+            modelBuilder.Entity("BackEnd_Clinica.Model.PacienteClinica", b =>
+                {
+                    b.Navigation("Receitas");
+
+                    b.Navigation("Resultados");
+                });
+
             modelBuilder.Entity("BackEnd_Clinica.Model.Profissional", b =>
                 {
                     b.Navigation("Clinicas");
+                });
+
+            modelBuilder.Entity("BackEnd_Clinica.Model.Receita", b =>
+                {
+                    b.Navigation("ReceitaArquivos");
+                });
+
+            modelBuilder.Entity("BackEnd_Clinica.Model.Resultado", b =>
+                {
+                    b.Navigation("ResultadoArquivos");
                 });
 
             modelBuilder.Entity("BackEnd_Clinica.Model.TratamentoClinica", b =>

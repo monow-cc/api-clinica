@@ -8,6 +8,7 @@ namespace BackEnd_Clinica.Model
         public Guid Id { get; set; }
         public Guid ClinicaId {get;set;}
         public Guid ProfissionalClinicaId { get; set;}
+        public Guid PacienteClinicaId { get; set;}
         public Guid PacienteId { get; set;}
         public Guid TratamentoClinicaId { get; set;}
         public int Tipo { get; set;}
@@ -20,5 +21,6 @@ namespace BackEnd_Clinica.Model
         public ProfissionalClinica? ProfissionalClinica { get; set;}
         public Paciente? Paciente { get; set;}
         public TratamentoClinica? TratamentoClinica { get; set; }
+        public PacienteClinica? PacienteClinica { get; set;}
     }
 }

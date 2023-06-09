@@ -5,6 +5,8 @@
         public Guid Id { get; set; }
         public Guid PacientId { get; set; }
         public Guid ProfissionalId { get; set; }
+        public Guid PacienteClinicaId { get; set; }
+        public string ProfissionalName { get; set; }
         public DateTime Data { get; set; }
         public string Name { get; set; }
         public string Tratamento { get; set; }

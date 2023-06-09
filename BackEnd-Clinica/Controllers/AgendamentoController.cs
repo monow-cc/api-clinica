@@ -57,7 +57,7 @@ namespace BackEnd_Clinica.Controllers
         {
 
             Guid clinicaId = Guid.Parse(HttpContext.Items["ClinicaId"]!.ToString()!);// pega clinica no token
-            var get = await _context.Agendamento.Where(x => x.ClinicaId == clinicaId && x.ProfissionalClinicaId == entity.ProfissionalId && x.Data == entity.Data).Include(e => e.Paciente).Include(e => e.TratamentoClinica).ToListAsync();
+            var get = await _context.Agendamento.Where(x => x.ClinicaId == clinicaId && x.ProfissionalClinicaId == entity.ProfissionalId && x.Data == entity.Data).Include(e => e.Paciente).Include(e => e.TratamentoClinica).Include(x => x.ProfissionalClinica).ThenInclude(x => x.Profissional).ToListAsync();
             
             var convert = _mapper.Map<List<Agendamento>, List<AgendamentoVOExit>>(get);
             

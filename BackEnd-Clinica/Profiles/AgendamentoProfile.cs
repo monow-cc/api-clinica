@@ -10,6 +10,7 @@ namespace BackEnd_Clinica.Profiles
         public AgendamentoProfile() {
             CreateMap<AgendamentoVOEnter, Agendamento>()
                 .ForPath(dest => dest.PacienteId, opts => opts.MapFrom(x => x.PacienteId))
+                .ForPath(dest => dest.PacienteClinicaId, opts => opts.MapFrom(x => x.PacienteClinicaId))
                 .ForPath(dest => dest.ProfissionalClinicaId, opts => opts.MapFrom(x => x.ProfissionalId))
                 .ForPath(dest => dest.TratamentoClinicaId, opts => opts.MapFrom(x => x.TratamentoId))
                 .ForPath(dest => dest.Tipo, opts => opts.MapFrom(x => x.Tipo))
@@ -20,7 +21,9 @@ namespace BackEnd_Clinica.Profiles
             CreateMap<Agendamento, AgendamentoVOExit>()
                 .ForPath(dest => dest.Id, opts => opts.MapFrom(x => x.Id))
                 .ForPath(dest => dest.PacientId, opts => opts.MapFrom(x => x.PacienteId))
+                .ForPath(dest => dest.ProfissionalName, opts => opts.MapFrom(x => x.ProfissionalClinica.Profissional.Name))
                 .ForPath(dest => dest.ProfissionalId, opts => opts.MapFrom(x => x.ProfissionalClinicaId))
+                .ForPath(dest => dest.PacienteClinicaId, opts => opts.MapFrom(x => x.PacienteClinicaId))
                 .ForPath(dest => dest.Pago, opts => opts.MapFrom(x => x.Pago))
                 .ForPath(dest => dest.Metodo, opts => opts.MapFrom(x => x.Metodo))
                 .ForPath(dest => dest.Tipo, opts => opts.MapFrom(x => x.Tipo))

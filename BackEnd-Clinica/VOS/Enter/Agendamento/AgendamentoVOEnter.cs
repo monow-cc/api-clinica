@@ -4,6 +4,8 @@
     {
         public Guid PacienteId { get; set; }
         public Guid ProfissionalId { get; set; }
+        public Guid PacienteClinicaId { get; set; }
+
         public Guid TratamentoId {get;set;}
         public DateTime Data { get; set; }
         public int Tipo { get; set; }

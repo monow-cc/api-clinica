@@ -18,7 +18,8 @@ namespace BackEnd_Clinica.Profiles
                 .ForPath(dest => dest.Name, opts => opts.MapFrom(x => x.Name))
                     .ForPath(dest => dest.Cpf, opts => opts.MapFrom(x => x.Cpf))
                         .ForPath(dest => dest.Email, opts => opts.MapFrom(x => x.Email))
-                            .ForPath(dest => dest.Phone, opts => opts.MapFrom(x => x.Phone));
+                            .ForPath(dest => dest.Sexo, opts => opts.MapFrom(x => x.Sexo))
+                                .ForPath(dest => dest.Nacimento, opts => opts.MapFrom(x => x.Nascimento));
 
 
         }

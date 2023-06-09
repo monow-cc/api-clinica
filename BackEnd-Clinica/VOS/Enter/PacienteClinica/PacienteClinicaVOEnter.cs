@@ -2,7 +2,7 @@
 {
     public class PacienteClinicaVOEnter
     {
-        public string Cpf { get; set; }
+        public long Value { get; set; }
         public string Connection { get; set; }
     }
 }
